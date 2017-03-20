@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Board from '../components/board';
 import { connect } from 'react-redux';
-import makeMove from '../actions'
+import { makeMove } from '../actions'
 
 class BoardContainerComponent extends Component {
     constructor(props) {
@@ -10,9 +10,21 @@ class BoardContainerComponent extends Component {
     }
 
     onKeyDown(e) {
-        console.log(e);
-        if (e.key === "ArrowLeft") {
-            this.props.dispatch(makeMove('LEFT'));
+        switch(e.key){
+            case "ArrowLeft":
+                this.props.dispatch(makeMove('LEFT'));
+                return;
+            case "ArrowRight":
+                this.props.dispatch(makeMove('RIGHT'));
+                return;
+            case "ArrowUp":
+                this.props.dispatch(makeMove('UP'));
+                return;
+            case "ArrowDown":
+                this.props.dispatch(makeMove('DOWN'));
+                return;
+            default:
+                return;
         }
     }
 

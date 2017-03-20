@@ -8,7 +8,7 @@ function updatePosition(position, direction) {
     );
 
     const updatePositionLeft = position => {
-        var newPosition = position;
+        var newPosition = [];
             for(var row = 0; row < position.length; row++) {
                 var tempNewRow = position[row].filter(value => value !== 0);
                 var finalNewRow = [];
@@ -31,22 +31,22 @@ function updatePosition(position, direction) {
     }
 
     const updatePositionRight = position => {
-            var newPosition = position;
+            var newPosition = [];
             for(var row = 0; row < position.length; row++) {
                 var tempNewRow = position[row].filter(value => value !== 0);
                 var finalNewRow = [];
                 
                 for (var newColumn = tempNewRow.length - 1; newColumn > -1; newColumn--) {
                         if(tempNewRow[newColumn] === tempNewRow[newColumn - 1]){
-                            finalNewRow.push(tempNewRow[newColumn] * 2);
+                            finalNewRow.unshift(tempNewRow[newColumn] * 2);
                             newColumn--;
                         } else {
-                            finalNewRow.push(tempNewRow[newColumn]);                      
+                            finalNewRow.unshift(tempNewRow[newColumn]);                      
                         }
                     }
         
                 while(finalNewRow.length < position[row].length){
-                    finalNewRow.push(0);
+                    finalNewRow.unshift(0);
                 }
                 newPosition.push(finalNewRow);
             }
@@ -71,7 +71,7 @@ function updatePosition(position, direction) {
     }
 }
 
-console.log(updatePosition([[0, 2, 0, 0], 
+console.log(updatePosition([[4, 0, 2, 2], 
                [0, 0, 0, 0], 
-               [0, 0, 2, 0], 
-               [0, 0, 0, 0]], 'LEFT'));
+               [4, 0, 4, 0], 
+               [0, 0, 0, 0]], 'DOWN'));

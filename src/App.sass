@@ -2,7 +2,7 @@
 .board
     position: relative
 
-.boardSquare, .square2
+.boardSquare, [class*='square']
     height: 64px
     width: 64px
     display: block
@@ -18,5 +18,13 @@
     position: absolute
     transition: all 1s
 
+[class*='square']
+    p
+        width: 100%
+        text-align: center
+
 .square2
     background-color: red
+
+.square4
+    background-color: blue

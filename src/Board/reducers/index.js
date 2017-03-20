@@ -8,8 +8,7 @@ const initialState = {
 }
 
 function updatePosition(position, direction) {
-
-    
+   
     const flipMatrix = matrix => (
         matrix[0].map((column, index) => (
             matrix.map(row => row[index])
@@ -17,45 +16,47 @@ function updatePosition(position, direction) {
     );
 
     const updatePositionLeft = position => {
-        var newPosition = position;
+        var newPosition = [];
             for(var row = 0; row < position.length; row++) {
-                var newRow = [];
-                for(var column = 0; column < position[row].length; column++) {
-                    if(position[row][column] !== 0){
-                        if(position[row][column + 1] !== position[row][column]){
-                            newRow.push(position[row][column]);
+                var tempNewRow = position[row].filter(value => value !== 0);
+                var finalNewRow = [];
+                
+                for (var newColumn = 0; newColumn < tempNewRow.length; newColumn++) {
+                        if(tempNewRow[newColumn] === tempNewRow[newColumn + 1]){
+                            finalNewRow.push(tempNewRow[newColumn] * 2);
+                            newColumn++;
                         } else {
-                            newRow.push(position[row][column] * 2);
-                            column++;
+                            finalNewRow.push(tempNewRow[newColumn]);                      
                         }
                     }
+        
+                while(finalNewRow.length < position[row].length){
+                    finalNewRow.push(0);
                 }
-                while(newRow.length < position[row].length){
-                    newRow.push(0);
-                }
-                newPosition.push(newRow);
+                newPosition.push(finalNewRow);
             }
             return newPosition;
     }
 
     const updatePositionRight = position => {
-            var newPosition = position;
+            var newPosition = [];
             for(var row = 0; row < position.length; row++) {
-                var newRow = [];
-                for(var column = position[row].length; column > 0; column--) {
-                    if(position[row][column] !== 0){
-                        if(position[row][column - 1] !== position[row][column]){
-                            newRow.unshift(position[row][column]);
+                var tempNewRow = position[row].filter(value => value !== 0);
+                var finalNewRow = [];
+                
+                for (var newColumn = tempNewRow.length - 1; newColumn > -1; newColumn--) {
+                        if(tempNewRow[newColumn] === tempNewRow[newColumn - 1]){
+                            finalNewRow.unshift(tempNewRow[newColumn] * 2);
+                            newColumn--;
                         } else {
-                            newRow.unshift(position[row][column] * 2);
-                            column--;
+                            finalNewRow.unshift(tempNewRow[newColumn]);                      
                         }
                     }
+        
+                while(finalNewRow.length < position[row].length){
+                    finalNewRow.unshift(0);
                 }
-                while(newRow.length < position[row].length){
-                    newRow.unshift(0);
-                }
-                newPosition.push(newRow);
+                newPosition.push(finalNewRow);
             }
             return newPosition;
     }
@@ -82,7 +83,9 @@ function updatePosition(position, direction) {
 function position(state=initialState, action) {
     switch(action.type) {
         case MAKE_MOVE:
-            return state;
+            return Object.assign({}, state, {
+                position: updatePosition(state.position, action.direction),
+            });
         default: 
             return state
     }

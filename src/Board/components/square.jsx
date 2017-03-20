@@ -12,7 +12,9 @@ function Square(props) {
         left: parseInt(props.column) * 64 + 'px',
     }
     return (
-        <div id={`${props.row}` + `${props.column}`} className={"activeSquare square" + props.number} style={stylePosition}></div>
+        <div id={`${props.row}` + `${props.column}`} className={"activeSquare square" + props.number} style={stylePosition}>
+            <p>{props.number}</p>
+        </div>
     )
 }
 
