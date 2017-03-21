@@ -71,7 +71,38 @@ function updatePosition(position, direction) {
     }
 }
 
-console.log(updatePosition([[4, 0, 2, 2], 
+// console.log(updatePosition([[4, 0, 2, 2], 
+//                [0, 0, 0, 0], 
+//                [4, 0, 4, 0], 
+//                [0, 0, 0, 0]], 'DOWN'));
+
+
+function spawnPiles(position, amountOfPiles) {
+    var emptySquares = [];
+
+    for (var row = 0; row < position.length; row++){
+        for(var column = 0; column < position.length; column++){
+            if(position[row][column] === 0){
+                emptySquares.push([row, column]);
+            }
+        }
+    }
+
+    var resultArray = []
+    while(amountOfPiles){
+        var pile = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+        var pileIndex = emptySquares.indexOf(pile);
+        emptySquares.splice(pileIndex, 1);
+        resultArray.push(pile);
+        amountOfPiles--;
+    }
+
+    return resultArray;
+
+}
+
+console.log(spawnPiles([[4, 0, 2, 2], 
                [0, 0, 0, 0], 
                [4, 0, 4, 0], 
-               [0, 0, 0, 0]], 'DOWN'));
+               [0, 0, 0, 0]], 2));
+

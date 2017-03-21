@@ -5,6 +5,8 @@ const initialState = {
                [0, 0, 0, 0], 
                [0, 0, 2, 0], 
                [0, 0, 0, 0]],
+    amountOfTilesToSpawn: 2,
+    gameIsLost: false,
 }
 
 function updatePosition(position, direction) {
@@ -79,12 +81,49 @@ function updatePosition(position, direction) {
     }
 }
 
+function spawnTiles(position, amountOfTiles) {
+    var emptySquares = [];
+
+    for (var row = 0; row < position.length; row++){
+        for(var column = 0; column < position.length; column++){
+            if(position[row][column] === 0){
+                emptySquares.push([row, column]);
+            }
+        }
+    }
+
+    var resultArray = []
+    while(amountOfTiles){
+        var tile = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+        var tileIndex = emptySquares.indexOf(tile);
+        emptySquares.splice(tileIndex, 1);
+        resultArray.push(tile);
+        amountOfTiles--;
+    }
+
+    return resultArray;
+
+}
+
 
 function position(state=initialState, action) {
     switch(action.type) {
         case MAKE_MOVE:
+            var newPosition = updatePosition(state.position, action.direction);
+            var newTiles = spawnTiles(newPosition, state.amountOfTilesToSpawn);
+            var gameIsLost = false;
+
+            if (newTiles.length > 0) {
+                for(var tile of newTiles){
+                    newPosition[tile[0]][tile[1]] = 2;
+                }
+            } else {
+                gameIsLost = true;
+            }
+
             return Object.assign({}, state, {
-                position: updatePosition(state.position, action.direction),
+                position: newPosition,
+                gameIsLost: gameIsLost,
             });
         default: 
             return state
