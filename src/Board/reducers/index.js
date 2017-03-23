@@ -1,4 +1,4 @@
-import { MAKE_MOVE } from '../actions'
+import { MAKE_MOVE, SPAWN_TILES } from '../actions'
 
 const initialState = {
     position: [[0, 2, 0, 0], 
@@ -110,6 +110,13 @@ function position(state=initialState, action) {
     switch(action.type) {
         case MAKE_MOVE:
             var newPosition = updatePosition(state.position, action.direction);
+
+            return Object.assign({}, state, {
+                position: newPosition,
+            });
+
+        case SPAWN_TILES:
+            var newPosition = state.position;
             var newTiles = spawnTiles(newPosition, state.amountOfTilesToSpawn);
             var gameIsLost = false;
 
@@ -125,6 +132,8 @@ function position(state=initialState, action) {
                 position: newPosition,
                 gameIsLost: gameIsLost,
             });
+
+
         default: 
             return state
     }

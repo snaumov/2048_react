@@ -12,12 +12,13 @@ function Square(props) {
         left: parseInt(props.column) * 64 + 'px',
     }
     return (
-        <div id={`${props.row}` + `${props.column}`} className={"activeSquare square" + props.number} style={stylePosition}>
+        <div className={"activeSquare square" + props.number} style={stylePosition}> 
             <p>{props.number}</p>
         </div>
     )
 }
 
+//id={`${props.row}` + `${props.column}`}
 
 
 export { BoardSquare, Square };
