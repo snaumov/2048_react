@@ -16,32 +16,32 @@
 
 .activeSquare
     position: absolute
-    transition: all 1s
+    transition: all 2s ease
 
-.example-enter
-  opacity: 0.01
-  //transition: all 1s
-
-
-.example-enter.example-enter-active 
-  opacity: 1
-  transition: all 500ms ease-in
+// .example-enter
+//   transform: translate(100%)
+//   //transition: all 1s
 
 
-.example-leave 
-  opacity: 1
+// .example-enter.example-enter-active 
+//   transform: translate(0%)
+//   transition: transform 1000ms ease-in-out
 
 
-.example-leave.example-leave-active
-  opacity: 0.01
-  transition: all 300ms ease-in
+// .example-leave 
+//   transform: translate(0%)
 
-.example-appear
-  opacity: 0.01
 
-.example-appear.example-appear-active
-  opacity: 1
-  transition: opacity .5s ease-in
+// .example-leave.example-leave-active
+//   transform: translate(-100%)
+//   transition: transform 1000ms ease-in-out
+
+// .example-appear
+//   opacity: 0.01
+
+// .example-appear.example-appear-active
+//   opacity: 1
+//   transition: opacity .5s ease-in
 
 [class*='square']
     p

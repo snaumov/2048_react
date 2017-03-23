@@ -17,6 +17,6 @@ function makeMove(direction) {
 export function makeMoveAndSpawnTiles(direction) {
     return dispatch => {
         dispatch(makeMove(direction));
-        dispatch(spawnTiles());
+        //dispatch(spawnTiles());
     }
 }

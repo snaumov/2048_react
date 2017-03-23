@@ -5,6 +5,10 @@ const initialState = {
                [0, 0, 0, 0], 
                [0, 0, 2, 0], 
                [0, 0, 0, 0]],
+    activeSquares: {
+        1: {position: [0, 1], value: 2},
+        2: {position: [2, 2], value: 2},
+    },
     amountOfTilesToSpawn: 2,
     gameIsLost: false,
 }
