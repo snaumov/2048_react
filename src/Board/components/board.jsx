@@ -5,11 +5,39 @@ import FlipMove from 'react-flip-move';
 import { Motion, spring } from 'react-motion';
 
 
-class Board extends Component {
+class Board extends Component{
     constructor(props){
         super(props);
-        var activeSquares = [];
+        //  this.activeSquares = [];
+
+        console.log(this.activeSquares);
+        this.renderActiveSquares = this.renderActiveSquares.bind(this);
+
+        //  for(var row = 0; row < this.position.length; row++){
+        //     for(var column = 0; column < this.position[row].length; column++){
+        //         if(this.position[row][column] !== 0) {
+        //             this.activeSquares.push(<Square number={this.position[row][column].value} row={row} column={column} key={this.position[row][column].id} id={this.position[row][column].id}/>)
+        //     }}
+        //  }
+        
     }
+
+    renderActiveSquares(){
+        return this.props.position.map((row, rowIndex) => 
+            row.map((column, columnIndex) => {
+                if(this.props.position[rowIndex][columnIndex] !== 0) {
+                    console.log(rowIndex, columnIndex);
+                    return <Square number={this.props.position[rowIndex][columnIndex].value} row={rowIndex} column={columnIndex} key={this.props.position[rowIndex][columnIndex].id} id={this.props.position[rowIndex][columnIndex].id}/>
+                } 
+        }))
+    }
+    // this.activeSquares = this.props.position.map((row, rowIndex) => 
+    //         row.map((column, columnIndex) => {
+    //             if(this.props.position[rowIndex][columnIndex] !== 0) {
+    //                 console.log(rowIndex, columnIndex);
+    //                 return <Square number={this.props.position[rowIndex][columnIndex].value} row={rowIndex} column={columnIndex} key={this.props.position[rowIndex][columnIndex].id} id={this.props.position[rowIndex][columnIndex].id}/>
+    //             } 
+    //     }))
     // constructor(props){
     //     super(props);
         // this.activeSquares = [
@@ -25,67 +53,66 @@ class Board extends Component {
     //     //update this.activeSquare based on nextProps position
     //     //update position of existing components, or push if it's doesn't exist
     // }
+    // var activeSquares = [];
+    // const position = props.position;
 
-    const position = props.position;
-    
+    // for(var row = 0; row < position.length; row++){
+    //         for(var column = 0; column < position[row].length; column++){
+    //             if(position[row][column] !== 0) {
+    //                 activeSquares.push(<Square number={position[row][column].value} row={row} column={column} key={position[row][column].id} id={position[row][column].id}/>)
+    //         }}
+    // }
 
-    for(var row = 0; row < position.length; row++){
-            for(var column = 0; column < position[row].length; column++){
-                if(position[row][column] !== 0) {
-                    activeSquares.push(
-                        <Motion style={{x: spring(0)}}>
-                            {({x}) =>
-                                <Square number={position[row][column]} row={row} column={column} key={row.toString()+column.toString()} x={x}/>
-                        
-                        }
-                        </Motion>
-                )
-            }}
+    componentWillReceiveProps(nextProps){
+        console.log(nextProps);
     }
     
-    return (
-        <div className="board">
-            <div className="boardRow">
-                <BoardSquare />
-                <BoardSquare />
-                <BoardSquare />
-                <BoardSquare />
+    render() {
+        return(
+            <div className="board">
+                <div className="boardRow">
+                    <BoardSquare />
+                    <BoardSquare />
+                    <BoardSquare />
+                    <BoardSquare />
+                </div>
+                <div className="boardRow">
+                    <BoardSquare />
+                    <BoardSquare />
+                    <BoardSquare />
+                    <BoardSquare />
+                </div>
+                <div className="boardRow">
+                    <BoardSquare />
+                    <BoardSquare />
+                    <BoardSquare />
+                    <BoardSquare />
+                </div>
+                <div className="boardRow">
+                    <BoardSquare />
+                    <BoardSquare />
+                    <BoardSquare />
+                    <BoardSquare />
+                </div>
+                {/*<ReactCSSTransitionGroup
+                    transitionName="example"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}
+                    transitionAppear={true}
+                    transitionAppearTimeout={500}>
+                    {activeSquares}
+                </ReactCSSTransitionGroup>*/}
+                {this.renderActiveSquares()}
+                {/*<Motion defaultStyle={{x: 0}} style={{x: spring(10)}}>
+                    {value => <div>{value.x}</div>}
+                </Motion>*/}
+                {/*<FlipMove duration={750} easing="cubic-bezier(.12,.36,.14,1.2)">
+                    {activeSquares}
+                </FlipMove>*/}
             </div>
-            <div className="boardRow">
-                <BoardSquare />
-                <BoardSquare />
-                <BoardSquare />
-                <BoardSquare />
-            </div>
-            <div className="boardRow">
-                <BoardSquare />
-                <BoardSquare />
-                <BoardSquare />
-                <BoardSquare />
-            </div>
-            <div className="boardRow">
-                <BoardSquare />
-                <BoardSquare />
-                <BoardSquare />
-                <BoardSquare />
-            </div>
-            {/*<ReactCSSTransitionGroup
-                transitionName="example"
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={300}
-                transitionAppear={true}
-                transitionAppearTimeout={500}>
-                {activeSquares}
-            </ReactCSSTransitionGroup>*/}
-            {activeSquares}
-            {/*<Motion defaultStyle={{x: 0}} style={{x: spring(10)}}>
-                {value => <div>{value.x}</div>}
-            </Motion>*/}
-            {/*<FlipMove duration={750} easing="cubic-bezier(.12,.36,.14,1.2)">
-                {activeSquares}
-            </FlipMove>*/}
-        </div>
-    )
+        )
+
+    }
 }
 
 export default Board;

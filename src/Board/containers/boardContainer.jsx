@@ -38,7 +38,7 @@ class BoardContainerComponent extends Component {
 
     render() {
         const { position } = this.props.position
-        
+        console.log(position);
         return (
             <Board position={position} onKeyPress={this.onKeyDown}/>
         )

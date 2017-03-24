@@ -1,6 +1,5 @@
 function updatePosition(position, direction) {
-
-    
+   
     const flipMatrix = matrix => (
         matrix[0].map((column, index) => (
             matrix.map(row => row[index])
@@ -14,8 +13,8 @@ function updatePosition(position, direction) {
                 var finalNewRow = [];
                 
                 for (var newColumn = 0; newColumn < tempNewRow.length; newColumn++) {
-                        if(tempNewRow[newColumn] === tempNewRow[newColumn + 1]){
-                            finalNewRow.push(tempNewRow[newColumn] * 2);
+                        if(tempNewRow[newColumn + 1] && tempNewRow[newColumn].value === tempNewRow[newColumn + 1].value){
+                            finalNewRow.push({id: newId(), value: tempNewRow[newColumn].value * 2});
                             newColumn++;
                         } else {
                             finalNewRow.push(tempNewRow[newColumn]);                      
@@ -37,8 +36,8 @@ function updatePosition(position, direction) {
                 var finalNewRow = [];
                 
                 for (var newColumn = tempNewRow.length - 1; newColumn > -1; newColumn--) {
-                        if(tempNewRow[newColumn] === tempNewRow[newColumn - 1]){
-                            finalNewRow.unshift(tempNewRow[newColumn] * 2);
+                        if(tempNewRow[newColumn].value === tempNewRow[newColumn - 1].value){
+                            finalNewRow.unshift({id: newId(), value: tempNewRow[newColumn] * 2});
                             newColumn--;
                         } else {
                             finalNewRow.unshift(tempNewRow[newColumn]);                      
@@ -71,38 +70,39 @@ function updatePosition(position, direction) {
     }
 }
 
-// console.log(updatePosition([[4, 0, 2, 2], 
+
+console.log(updatePosition([[, 0, {id: 1, value: 2}, 2], 
+               [0, 0, 0, 0], 
+               [0, 0, {id:1, value: 2}, 0], 
+               [0, 0, 0, 0]], 'LEFT'));
+
+
+// function spawnPiles(position, amountOfPiles) {
+//     var emptySquares = [];
+
+//     for (var row = 0; row < position.length; row++){
+//         for(var column = 0; column < position.length; column++){
+//             if(position[row][column] === 0){
+//                 emptySquares.push([row, column]);
+//             }
+//         }
+//     }
+
+//     var resultArray = []
+//     while(amountOfPiles){
+//         var pile = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+//         var pileIndex = emptySquares.indexOf(pile);
+//         emptySquares.splice(pileIndex, 1);
+//         resultArray.push(pile);
+//         amountOfPiles--;
+//     }
+
+//     return resultArray;
+
+// }
+
+// console.log(spawnPiles([[4, 0, 2, 2], 
 //                [0, 0, 0, 0], 
 //                [4, 0, 4, 0], 
-//                [0, 0, 0, 0]], 'DOWN'));
-
-
-function spawnPiles(position, amountOfPiles) {
-    var emptySquares = [];
-
-    for (var row = 0; row < position.length; row++){
-        for(var column = 0; column < position.length; column++){
-            if(position[row][column] === 0){
-                emptySquares.push([row, column]);
-            }
-        }
-    }
-
-    var resultArray = []
-    while(amountOfPiles){
-        var pile = emptySquares[Math.floor(Math.random() * emptySquares.length)];
-        var pileIndex = emptySquares.indexOf(pile);
-        emptySquares.splice(pileIndex, 1);
-        resultArray.push(pile);
-        amountOfPiles--;
-    }
-
-    return resultArray;
-
-}
-
-console.log(spawnPiles([[4, 0, 2, 2], 
-               [0, 0, 0, 0], 
-               [4, 0, 4, 0], 
-               [0, 0, 0, 0]], 2));
+//                [0, 0, 0, 0]], 2));
 

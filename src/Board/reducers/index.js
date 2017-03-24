@@ -1,14 +1,15 @@
 import { MAKE_MOVE, SPAWN_TILES } from '../actions'
+import { newId } from '../../Misc/utils'
 
 const initialState = {
-    position: [[0, 2, 0, 0], 
+    position: [[0, {id: 1, value: 2}, 0, 0], 
                [0, 0, 0, 0], 
-               [0, 0, 2, 0], 
+               [0, 0, {id: 2, value: 2}, 0], 
                [0, 0, 0, 0]],
-    activeSquares: {
-        1: {position: [0, 1], value: 2},
-        2: {position: [2, 2], value: 2},
-    },
+    // activeSquares: {
+    //     1: {position: [0, 1], value: 2},
+    //     2: {position: [2, 2], value: 2},
+    // },
     amountOfTilesToSpawn: 2,
     gameIsLost: false,
 }
@@ -19,7 +20,7 @@ function updatePosition(position, direction) {
         matrix[0].map((column, index) => (
             matrix.map(row => row[index])
         ))
-    );
+    )
 
     const updatePositionLeft = position => {
         var newPosition = [];
@@ -28,8 +29,8 @@ function updatePosition(position, direction) {
                 var finalNewRow = [];
                 
                 for (var newColumn = 0; newColumn < tempNewRow.length; newColumn++) {
-                        if(tempNewRow[newColumn] === tempNewRow[newColumn + 1]){
-                            finalNewRow.push(tempNewRow[newColumn] * 2);
+                        if(tempNewRow[newColumn + 1] && tempNewRow[newColumn].value === tempNewRow[newColumn + 1].value){
+                            finalNewRow.push({id: newId(), value: parseInt(tempNewRow[newColumn].value) * 2});
                             newColumn++;
                         } else {
                             finalNewRow.push(tempNewRow[newColumn]);                      
@@ -51,8 +52,8 @@ function updatePosition(position, direction) {
                 var finalNewRow = [];
                 
                 for (var newColumn = tempNewRow.length - 1; newColumn > -1; newColumn--) {
-                        if(tempNewRow[newColumn] === tempNewRow[newColumn - 1]){
-                            finalNewRow.unshift(tempNewRow[newColumn] * 2);
+                        if(tempNewRow[newColumn - 1] && tempNewRow[newColumn].value === tempNewRow[newColumn - 1].value){
+                            finalNewRow.unshift({id: newId(), value: tempNewRow[newColumn] * 2});
                             newColumn--;
                         } else {
                             finalNewRow.unshift(tempNewRow[newColumn]);                      
@@ -75,6 +76,7 @@ function updatePosition(position, direction) {
             return updatePositionRight(position);
 
         case 'UP':
+            //return updatePositionLeft(position);
             return flipMatrix(updatePositionLeft(flipMatrix(position)));
 
         case 'DOWN': 
@@ -126,7 +128,7 @@ function position(state=initialState, action) {
 
             if (newTiles.length > 0) {
                 for(var tile of newTiles){
-                    newPosition[tile[0]][tile[1]] = 2;
+                    newPosition[tile[0]][tile[1]] = {id: newId(), value: 2};
                 }
             } else {
                 gameIsLost = true;
