@@ -1,22 +1,37 @@
+$boardSquareColor: #CDC1B4
+$boardSquareBorderColor: #BBADA0
+
 //board
 .board
+    display: block
     position: relative
+    background-color: $boardSquareBorderColor
+    width: 576px
+    border: 8px solid $boardSquareBorderColor
+    border-radius: 16px
 
 .boardSquare, [class*='square']
-    height: 64px
-    width: 64px
     display: block
 
+[class*='square']
+    height: 128px
+    width: 128px
+    border-radius: 8px
+    border: 1px solid red
+
 .boardSquare
-    background-color: grey
-    border: 1px solid black
+    border-radius: 16px
+    height: 128px
+    width: 128px
+    background-color: $boardSquareColor
+    border: 8px solid $boardSquareBorderColor
 
 .boardRow
     display: flex
 
 .activeSquare
     position: absolute
-    transition: all 1s
+    transition: all 100ms
 
 // .example-enter
 //   transform: translate(100%)
