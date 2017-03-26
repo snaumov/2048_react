@@ -10,7 +10,7 @@ const initialState = {
     //     1: {position: [0, 1], value: 2},
     //     2: {position: [2, 2], value: 2},
     // },
-    amountOfTilesToSpawn: 2,
+    amountOfTilesToSpawn: 1,
     gameIsLost: false,
 }
 
@@ -30,7 +30,7 @@ function updatePosition(position, direction) {
                 
                 for (var newColumn = 0; newColumn < tempNewRow.length; newColumn++) {
                         if(tempNewRow[newColumn + 1] && tempNewRow[newColumn].value === tempNewRow[newColumn + 1].value){
-                            finalNewRow.push({id: newId(), value: parseInt(tempNewRow[newColumn].value) * 2});
+                            finalNewRow.push({id: newId(), value: tempNewRow[newColumn].value * 2});
                             newColumn++;
                         } else {
                             finalNewRow.push(tempNewRow[newColumn]);                      
@@ -53,7 +53,7 @@ function updatePosition(position, direction) {
                 
                 for (var newColumn = tempNewRow.length - 1; newColumn > -1; newColumn--) {
                         if(tempNewRow[newColumn - 1] && tempNewRow[newColumn].value === tempNewRow[newColumn - 1].value){
-                            finalNewRow.unshift({id: newId(), value: tempNewRow[newColumn] * 2});
+                            finalNewRow.unshift({id: newId(), value: tempNewRow[newColumn].value * 2});
                             newColumn--;
                         } else {
                             finalNewRow.unshift(tempNewRow[newColumn]);                      

@@ -71,10 +71,10 @@ function updatePosition(position, direction) {
 }
 
 
-console.log(updatePosition([[, 0, {id: 1, value: 2}, 2], 
-               [0, 0, 0, 0], 
-               [0, 0, {id:1, value: 2}, 0], 
-               [0, 0, 0, 0]], 'LEFT'));
+// console.log(updatePosition([[, 0, {id: 1, value: 2}, 2], 
+//                [0, 0, 0, 0], 
+//                [0, 0, {id:1, value: 2}, 0], 
+//                [0, 0, 0, 0]], 'LEFT'));
 
 
 // function spawnPiles(position, amountOfPiles) {
@@ -106,3 +106,10 @@ console.log(updatePosition([[, 0, {id: 1, value: 2}, 2],
 //                [4, 0, 4, 0], 
 //                [0, 0, 0, 0]], 2));
 
+const flipMatrix = matrix => (
+    matrix[0].map((column, index) => (
+        matrix.map(row => row[index])
+    ))
+)
+
+console.log(flipMatrix([[0, 1], [2, 3]]));

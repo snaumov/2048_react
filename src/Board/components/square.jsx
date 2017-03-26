@@ -21,8 +21,8 @@ function Square (props) {
     // }
     console.log('in square')
     const stylePosition = {
-            top: 8 + parseInt(props.row) * (128 + 16) + 'px',
-            left: 8 + parseInt(props.column) * (128 + 16) + 'px',
+            top: 8 + parseInt(props.row) * (128 + 14) + 'px',
+            left: 8 + parseInt(props.column) * (128 + 14) + 'px',
     }
     
     

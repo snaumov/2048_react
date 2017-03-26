@@ -26,7 +26,7 @@ class Board extends Component{
         return this.props.position.map((row, rowIndex) => 
             row.map((column, columnIndex) => {
                 if(this.props.position[rowIndex][columnIndex] !== 0) {
-                    console.log(rowIndex, columnIndex);
+                    console.log(this.props.position[rowIndex][columnIndex]);
                     return <Square number={this.props.position[rowIndex][columnIndex].value} row={rowIndex} column={columnIndex} key={this.props.position[rowIndex][columnIndex].id} id={this.props.position[rowIndex][columnIndex].id}/>
                 } 
         }))
@@ -94,15 +94,14 @@ class Board extends Component{
                     <BoardSquare />
                     <BoardSquare />
                 </div>
-                {/*<ReactCSSTransitionGroup
-                    transitionName="example"
+                <ReactCSSTransitionGroup
+                    transitionName="squareAnimation"
                     transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}
-                    transitionAppear={true}
-                    transitionAppearTimeout={500}>
-                    {activeSquares}
-                </ReactCSSTransitionGroup>*/}
-                {this.renderActiveSquares()}
+                    transitionLeaveTimeout={10}>
+                    {this.renderActiveSquares()}
+                </ReactCSSTransitionGroup>
+                {/*transitionAppear={true}
+                transitionAppearTimeout={500}*/}
                 {/*<Motion defaultStyle={{x: 0}} style={{x: spring(10)}}>
                     {value => <div>{value.x}</div>}
                 </Motion>*/}

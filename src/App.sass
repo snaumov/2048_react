@@ -1,5 +1,39 @@
 $boardSquareColor: #CDC1B4
 $boardSquareBorderColor: #BBADA0
+$square2Color: #EEE4DA
+$square4Color: #EDE0c8
+$square8Color: #F2B179
+$square16Color: #F59563
+$square32Color: #F67C5F
+$panelColor: #394B59
+
+body 
+  margin: 0
+  padding: 0
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif
+
+//header
+
+.header
+    display: flex
+    height: 40px
+    background-color: $panelColor
+    box-shadow: 2px 0px 1px grey
+
+    .headerControls
+        display: flex
+        justify-content: space-between
+        width: 200px
+        margin: auto
+        align-items: center
+
+        span
+            color: white
+            
+        
+        .logo
+            font-size: 24px
+
 
 //board
 .board
@@ -14,10 +48,16 @@ $boardSquareBorderColor: #BBADA0
     display: block
 
 [class*='square']
-    height: 128px
-    width: 128px
+    height: 129px
+    width: 129px
     border-radius: 8px
-    border: 1px solid red
+
+    p
+        padding: 0
+        margin-top: 10%
+        font-size: 87px
+        font-weight: bold
+    //border: 1px solid red
 
 .boardSquare
     border-radius: 16px
@@ -33,14 +73,14 @@ $boardSquareBorderColor: #BBADA0
     position: absolute
     transition: all 100ms
 
-// .example-enter
-//   transform: translate(100%)
-//   //transition: all 1s
+.squareAnimation-enter
+  transform: scale(1.2, 1.2)
+  //transition: all 1s
 
 
-// .example-enter.example-enter-active 
-//   transform: translate(0%)
-//   transition: transform 1000ms ease-in-out
+.squareAnimation-enter.squareAnimation-enter-active 
+  transform: scale(1, 1)
+  transition: transform 100ms ease-in-out
 
 
 // .example-leave 
@@ -64,7 +104,31 @@ $boardSquareBorderColor: #BBADA0
         text-align: center
 
 .square2
-    background-color: red
+    background-color: $square2Color
+    p
+        color: #776E65
 
 .square4
-    background-color: blue
+    background-color: $square4Color
+    p
+        color: #776E65
+
+.square8
+    background-color: $square8Color
+    p
+        color: #F9F6F2
+
+.square16
+    background-color: $square16Color
+    p
+        color: #F9F6F2
+
+.square32
+    background-color: $square32Color
+    p
+        color: #F9F6F2
+
+.square128
+    p
+        font-size: 70px
+
