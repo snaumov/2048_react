@@ -1,4 +1,5 @@
 import { MAKE_MOVE, SPAWN_TILES } from '../actions'
+import { SET_AMOUNT_OF_TILE_TO_SPAWN } from '../../UI/actions'
 import { newId } from '../../Misc/utils'
 
 const initialState = {
@@ -138,6 +139,11 @@ function position(state=initialState, action) {
                 position: newPosition,
                 gameIsLost: gameIsLost,
             });
+
+        case SET_AMOUNT_OF_TILE_TO_SPAWN:
+            return Object.assign({}, state, {
+                amountOfTilesToSpawn: action.amountOfTilesToSpawn,
+            })
 
 
         default: 

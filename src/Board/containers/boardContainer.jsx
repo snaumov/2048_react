@@ -33,7 +33,7 @@ class BoardContainerComponent extends Component {
     }
 
     componentWillUnmount() {
-        document.body.removeEventListener('keydown');
+        document.body.removeEventListener('keydown', this.onKeyDown);
     }
 
     render() {
