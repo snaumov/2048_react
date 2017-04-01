@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter, Route } from 'react-router-dom'
 import './App.css';
 import BoardContainer from './Board/containers/boardContainer';
+import GameView from './UI/components/gameView';
 import Header from './UI/components/header'
 import SettingsContainer from './UI/containers/settingsContainer'
 
@@ -21,7 +22,7 @@ class AppMainView extends Component {
     return (
       <div className="App">
         <Header />
-        <BoardContainer />
+        <GameView />
       </div>
     );
   }
