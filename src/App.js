@@ -5,6 +5,7 @@ import BoardContainer from './Board/containers/boardContainer';
 import GameView from './UI/components/gameView';
 import Header from './UI/components/header'
 import SettingsContainer from './UI/containers/settingsContainer'
+import SavedGamesContainer from './UI/containers/savedGamesContainer';
 
 class AppSettingsView extends Component {
   render() {
@@ -28,6 +29,17 @@ class AppMainView extends Component {
   }
 }
 
+class AppSavedGamesView extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <SavedGamesContainer />
+      </div>
+    );
+  }
+}
+
 class App extends React.Component {
     render() {
         return (
@@ -35,6 +47,7 @@ class App extends React.Component {
             <HashRouter>
               <div>
                 <Route exact path="/" component={AppMainView} />
+                <Route path="/saves" component={AppSavedGamesView} />
                 <Route path="/settings" component={AppSettingsView} />
               </div>
 
