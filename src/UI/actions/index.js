@@ -25,14 +25,14 @@ export function saveGame(game) {
 
 export function loadGame(gameNumber) {
     return {
-        type: SAVE_GAME,
+        type: LOAD_GAME,
         gameNumber
     }
 }
 
 export function deleteGame(gameNumber) {
     return {
-        type: SAVE_GAME,
+        type: DELETE_GAME,
         gameNumber
     }
 }

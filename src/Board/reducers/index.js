@@ -1,5 +1,5 @@
 import { MAKE_MOVE, SPAWN_TILES } from '../actions'
-import { SET_AMOUNT_OF_TILE_TO_SPAWN } from '../../UI/actions'
+import { SET_AMOUNT_OF_TILE_TO_SPAWN, LOAD_GAME } from '../../UI/actions'
 import { newId } from '../../Misc/utils'
 
 const initialState = {
@@ -143,6 +143,11 @@ function position(state=initialState, action) {
         case SET_AMOUNT_OF_TILE_TO_SPAWN:
             return Object.assign({}, state, {
                 amountOfTilesToSpawn: action.amountOfTilesToSpawn,
+            })
+        
+        case LOAD_GAME:
+            return Object.assign({}, state, {
+                position: JSON.parse(localStorage.getItem('savedGames'))[action.gameNumber],
             })
 
 

@@ -2,23 +2,35 @@ import React, { Component } from 'react';
 import SavedGamesView from '../components/savedGames';
 import { connect } from 'react-redux'
 import { loadGame, deleteGame } from '../actions';
+import { Redirect } from 'react-router';
 
 class SavedGamesComponent extends Component {
     constructor(props) {
         super(props);
         this.loadGame = this.loadGame.bind(this);
+        this.state = {redirectIsNeeded: false };
     }
     
     loadGame = (gameNumber) => {
-        console.log(gameNumber)
-        this.props.dispatch((gameNumber) => loadGame(gameNumber));
-        this.props.router.push('/');
+        this.props.dispatch(loadGame(gameNumber));
+        this.setState({redirectIsNeeded: true});
+    }
+
+    deleteGame = (gameNumber) => {
+        this.props.dispatch(deleteGame(gameNumber));
     }
 
     render() {
+        if (this.state.redirectIsNeeded) {
+            console.log('redirect is needed');
+            return (
+                <Redirect to="/" />
+            )
+        }
+        
         return (
             <div>
-                <SavedGamesView onLoadGameClick={this.loadGame} savedGames={this.props.UI.savedGames}/>
+                <SavedGamesView onLoadGameClick={this.loadGame} onDeleteGameClick={this.deleteGame} savedGames={this.props.UI.savedGames}/>
             </div>
         );
     }

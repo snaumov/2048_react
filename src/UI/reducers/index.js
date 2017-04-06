@@ -25,9 +25,12 @@ function UI (state=initialUIstate, action) {
             return Object.assign({}, state, {
                 savedGames: newSavedGames,
             })
-        case DELETE_GAME:         
+        case DELETE_GAME:  
+            var newSavedGames = state.savedGames.filter((val, ind) => ind != action.gameNumber);
+            localStorage.setItem('savedGames', JSON.stringify(newSavedGames));
+
             return Object.assign({}, state, {
-                savedGames: state.savedGames.splice(action.gameNumber)
+                savedGames: newSavedGames,
             })
         default:
             return state;

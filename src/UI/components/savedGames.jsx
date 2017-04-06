@@ -6,16 +6,16 @@ function SavedGameView(props) {
     return (
         <div className="savedGame">
             <Board position={props.position} />
-            <button onClick={e => props.onLoadGameClick(e.target.id)}>Load Game</button>
-            <button onClick>Save Game</button>
+            <button onClick={() => props.onLoadGameClick(props.gameNumber)}>Load Game</button>
+            <button onClick={() => props.onDeleteGameClick(props.gameNumber)}>Delete Game</button>
         </div>
     )
 }
 
 function SavedGamesView(props) {
 
-    const savedGamesList = props.savedGames.map((position) => {
-        return <SavedGameView onLoadGameClick={props.onLoadGameClick} position={position}/>
+    const savedGamesList = props.savedGames.map((position, index) => {
+        return <SavedGameView gameNumber={index} onLoadGameClick={props.onLoadGameClick} onDeleteGameClick={props.onDeleteGameClick} position={position}/>
     })
     console.log(props.savedGames, savedGamesList)
     return(
