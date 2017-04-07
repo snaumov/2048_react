@@ -22,7 +22,6 @@ class SavedGamesComponent extends Component {
 
     render() {
         if (this.state.redirectIsNeeded) {
-            console.log('redirect is needed');
             return (
                 <Redirect to="/" />
             )

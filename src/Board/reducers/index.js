@@ -1,5 +1,5 @@
 import { MAKE_MOVE, SPAWN_TILES } from '../actions'
-import { SET_AMOUNT_OF_TILE_TO_SPAWN, LOAD_GAME } from '../../UI/actions'
+import { SET_AMOUNT_OF_TILE_TO_SPAWN, LOAD_GAME, NEW_GAME } from '../../UI/actions'
 import { newId } from '../../Misc/utils'
 
 const initialState = {
@@ -13,10 +13,13 @@ const initialState = {
     // },
     amountOfTilesToSpawn: 1,
     gameIsLost: false,
+    highScore: 0,
 }
 
-function updatePosition(position, direction) {
-   
+function updatePosition(position, direction, highScore) {
+    
+    var newHighScore = highScore;
+
     const flipMatrix = matrix => (
         matrix[0].map((column, index) => (
             matrix.map(row => row[index])
@@ -32,6 +35,7 @@ function updatePosition(position, direction) {
                 for (var newColumn = 0; newColumn < tempNewRow.length; newColumn++) {
                         if(tempNewRow[newColumn + 1] && tempNewRow[newColumn].value === tempNewRow[newColumn + 1].value){
                             finalNewRow.push({id: newId(), value: tempNewRow[newColumn].value * 2});
+                            newHighScore += tempNewRow[newColumn].value * 2;
                             newColumn++;
                         } else {
                             finalNewRow.push(tempNewRow[newColumn]);                      
@@ -55,6 +59,7 @@ function updatePosition(position, direction) {
                 for (var newColumn = tempNewRow.length - 1; newColumn > -1; newColumn--) {
                         if(tempNewRow[newColumn - 1] && tempNewRow[newColumn].value === tempNewRow[newColumn - 1].value){
                             finalNewRow.unshift({id: newId(), value: tempNewRow[newColumn].value * 2});
+                            newHighScore += tempNewRow[newColumn].value * 2;
                             newColumn--;
                         } else {
                             finalNewRow.unshift(tempNewRow[newColumn]);                      
@@ -71,20 +76,20 @@ function updatePosition(position, direction) {
 
     switch(direction) {
         case 'LEFT':
-            return updatePositionLeft(position);
+            return {position: updatePositionLeft(position), highScore: newHighScore};
         
         case 'RIGHT':
-            return updatePositionRight(position);
+            return {position: updatePositionRight(position), highScore: newHighScore};
 
         case 'UP':
             //return updatePositionLeft(position);
-            return flipMatrix(updatePositionLeft(flipMatrix(position)));
+            return {position: flipMatrix(updatePositionLeft(flipMatrix(position))), highScore: newHighScore};
 
         case 'DOWN': 
-            return flipMatrix(updatePositionRight(flipMatrix(position)));
+            return {position: flipMatrix(updatePositionRight(flipMatrix(position))), highScore: newHighScore};
             
         default: 
-            return position;
+            return {position: position, highScore: newHighScore};
     }
 }
 
@@ -116,10 +121,11 @@ function spawnTiles(position, amountOfTiles) {
 function position(state=initialState, action) {
     switch(action.type) {
         case MAKE_MOVE:
-            var newPosition = updatePosition(state.position, action.direction);
+            const newPosition = updatePosition(state.position, action.direction, state.highScore);
 
             return Object.assign({}, state, {
-                position: newPosition,
+                position: newPosition.position,
+                highScore: newPosition.highScore
             });
 
         case SPAWN_TILES:
@@ -148,6 +154,11 @@ function position(state=initialState, action) {
         case LOAD_GAME:
             return Object.assign({}, state, {
                 position: JSON.parse(localStorage.getItem('savedGames'))[action.gameNumber],
+            })
+        
+        case NEW_GAME: 
+            return Object.assign({}, state, {
+                position: initialState.position,
             })
 
 

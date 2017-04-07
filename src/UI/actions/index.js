@@ -2,6 +2,7 @@ export const SET_AMOUNT_OF_TILE_TO_SPAWN = "SET_AMOUNT_OF_TILE_TO_SPAWN";
 export const SAVE_GAME = "SAVE_GAME";
 export const LOAD_GAME = "LOAD_GAME";
 export const DELETE_GAME = "DELETE_GAME";
+export const NEW_GAME = "NEW_GAME";
 
 export function setAmountOfTilesToSpawn(amount) {
     return {
@@ -34,5 +35,11 @@ export function deleteGame(gameNumber) {
     return {
         type: DELETE_GAME,
         gameNumber
+    }
+}
+
+export function newGame() {
+    return {
+        type: NEW_GAME,
     }
 }
