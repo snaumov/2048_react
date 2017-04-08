@@ -1,7 +1,9 @@
-import { SAVE_GAME, LOAD_GAME, DELETE_GAME } from '../actions';
+import { SAVE_GAME, LOAD_GAME, DELETE_GAME, SHOW_NOTIFICATION, HIDE_NOTIFICATION } from '../actions';
 
 const initialUIstate = {
     savedGames: JSON.parse(localStorage.getItem('savedGames')) || [],
+    showNotification: false,
+    notificationText: '',
 }
 
 function updateSavedGames(savedGames, newGame) {
@@ -31,6 +33,15 @@ function UI (state=initialUIstate, action) {
 
             return Object.assign({}, state, {
                 savedGames: newSavedGames,
+            })
+        case SHOW_NOTIFICATION: 
+            return Object.assign({}, state, {
+                showNotification: true,
+                notificationText: action.notificationText,
+            })
+        case HIDE_NOTIFICATION: 
+            return Object.assign({}, state, {
+                showNotification: false,
             })
         default:
             return state;

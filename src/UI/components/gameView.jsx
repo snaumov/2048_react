@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import BoardContainer from '../../Board/containers/boardContainer'
-import { saveGame, newGame } from '../actions';
+import { saveGameAndShowNotification, newGame } from '../actions';
 import { connect } from 'react-redux';
+import BoardContainer from '../../Board/containers/boardContainer'
+import NotificationPanel from './notificationPanel'
 
 function HighScoreTile(props) {
     return (
@@ -20,7 +21,7 @@ class GameViewComponent extends Component {
     }
 
     saveGameButtonClick (game) {
-        this.props.dispatch(saveGame(this.props.position.position));
+        this.props.dispatch(saveGameAndShowNotification(this.props.position.position, 'Game has been saved'));
     }
 
     newGameButtonClick() {
@@ -34,6 +35,7 @@ class GameViewComponent extends Component {
                 <button onClick={this.saveGameButtonClick} className="saveGameButton">Save Game</button>
                 <HighScoreTile highScore={this.props.position.highScore} />
                 <BoardContainer />
+                <NotificationPanel showNotification={this.props.ui.showNotification} />
             </div>
         );
     }
@@ -42,6 +44,7 @@ class GameViewComponent extends Component {
 const mapStateToProps = (state) => {
     return {
         position: state.position,
+        ui: state.UI,
     }
 }
 
