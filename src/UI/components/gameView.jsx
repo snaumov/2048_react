@@ -31,10 +31,17 @@ class GameViewComponent extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.newGameButtonClick} className="newGameButton">New Game</button>
-                <button onClick={this.saveGameButtonClick} className="saveGameButton">Save Game</button>
-                <HighScoreTile highScore={this.props.position.highScore} />
-                <BoardContainer />
+                <div className="gameViewControlsRow">
+                    <div className="controlsRowButtons">
+                        <button onClick={this.newGameButtonClick} className="newGameButton">New Game</button>
+                        <button onClick={this.saveGameButtonClick} className="saveGameButton">Save Game</button>
+                    </div>
+                    <HighScoreTile highScore={this.props.position.highScore} />
+                </div>
+                <div className="boardContainerRow">
+                    <BoardContainer />
+                </div>
+                
                 <NotificationPanel showNotification={this.props.ui.showNotification} />
             </div>
         );

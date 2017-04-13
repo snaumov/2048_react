@@ -1,3 +1,5 @@
+@import "aux/fa/css/font-awesome.min.css"
+
 $boardSquareColor: #CDC1B4
 $boardSquareBorderColor: #BBADA0
 $square2Color: #EEE4DA
@@ -20,28 +22,10 @@ body
     background-color: $panelColor
     box-shadow: 2px 0px 1px grey
 
-    .headerButton
-        display: flex
-        width: 70px
-        height: 30px
-        border-radius: 4px
-        align-items: center
-        justify-content: space-around
-        text-decoration: none
-        color: white
-    
-    .headerButton:visited
-        text-decoration: none
-    
-    .headerButton:hover
-        background-color: rgba(255, 255, 255, 0.13)
-        cursor: pointer
-        
-
-    .headerControls
+    .headerShowCase
         display: flex
         justify-content: space-between
-        width: 200px
+        width: 350px
         margin: auto
         align-items: center
 
@@ -51,6 +35,38 @@ body
         
         .logo
             font-size: 24px
+    
+        .headerControls
+            display: flex
+            flex-flow: row
+
+            .headerButton
+                display: flex
+                width: auto
+                height: 30px
+                border-radius: 4px
+                align-items: center
+                justify-content: space-around
+                color: white
+
+                .headerIcon
+                    margin: 0px 2px 0px 8px
+            
+            .headerButtonText
+                color: rgba(255, 255, 255, 0.78)
+                text-decoration: none
+                font-size: 14px
+                margin-right: 5px
+
+            .headerButtonText:visited
+                text-decoration: none
+            
+            .headerButton:hover
+                background-color: rgba(255, 255, 255, 0.13)
+                cursor: pointer
+        
+
+
 
 
 //board
@@ -163,11 +179,13 @@ body
 
 .notification-enter 
   opacity: 0.01
+  transform: translate(0px, -100px)
 
 
 .notification-enter.notification-enter-active 
   opacity: 1
-  transition: opacity 500ms ease-in
+  transition: all 100ms ease-in
+  transform: translate(0px, 0px)
 
 
 .notification-leave 
@@ -185,3 +203,14 @@ body
   opacity: 1
   transition: opacity .5s ease-in
 
+//gameView
+
+.gameViewControlsRow
+    margin: auto
+    display: flex
+    flex-flow: row
+    width: 600px
+    justify-content: space-around
+.boardContainerRow
+    display: flex
+    justify-content: space-around

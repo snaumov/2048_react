@@ -12,8 +12,8 @@ class NotificationPanel extends Component {
                 transitionEnterTimeout={500}
                 transitionLeaveTimeout={300}>
                 {this.props.showNotification ? 
-                    <div className="notificationPanel">
-                        <span key="1">Notification message!</span>
+                    <div key="1" className="notificationPanel">
+                        <span>Notification message!</span>
                     </div> 
                 : undefined }
             </CSSTransitionGroup>
