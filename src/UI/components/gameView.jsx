@@ -9,6 +9,15 @@ function HighScoreTile(props) {
         <div className="highScoreTile">
             <p>HighScore</p>
             <span>{props.highScore}</span>
+        </div> 
+    )
+}
+
+function CurrentScoreTile(props) {
+    return (
+        <div className="currentScoreTile">
+            <p>Score</p>
+            <span>{props.currentScore}</span>
         </div>
     )
 }
@@ -21,7 +30,7 @@ class GameViewComponent extends Component {
     }
 
     saveGameButtonClick (game) {
-        this.props.dispatch(saveGameAndShowNotification(this.props.position.position, 'Game has been saved'));
+        this.props.dispatch(saveGameAndShowNotification(this.props.position.position, 'The game has been saved!'));
     }
 
     newGameButtonClick() {
@@ -36,13 +45,17 @@ class GameViewComponent extends Component {
                         <button onClick={this.newGameButtonClick} className="newGameButton">New Game</button>
                         <button onClick={this.saveGameButtonClick} className="saveGameButton">Save Game</button>
                     </div>
-                    <HighScoreTile highScore={this.props.position.highScore} />
+                    <div className="controlsRowScoreTiles">
+                        <HighScoreTile highScore={this.props.position.highScore} />
+                        <CurrentScoreTile currentScore={this.props.position.currentScore} />
+                    </div>
+                    
                 </div>
                 <div className="boardContainerRow">
                     <BoardContainer />
                 </div>
                 
-                <NotificationPanel showNotification={this.props.ui.showNotification} />
+                <NotificationPanel showNotification={this.props.ui.showNotification} notificationText={this.props.ui.notificationText}/>
             </div>
         );
     }

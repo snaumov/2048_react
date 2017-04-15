@@ -13,12 +13,13 @@ const initialState = {
     // },
     amountOfTilesToSpawn: 1,
     gameIsLost: false,
-    highScore: 0,
+    currentScore: 0,
+    highScore: localStorage.getItem('highScore') || 0,
 }
 
-function updatePosition(position, direction, highScore) {
+function updatePosition(position, direction, currentScore) {
     
-    var newHighScore = highScore;
+    var newHighScore = currentScore;
 
     const flipMatrix = matrix => (
         matrix[0].map((column, index) => (
@@ -76,20 +77,20 @@ function updatePosition(position, direction, highScore) {
 
     switch(direction) {
         case 'LEFT':
-            return {position: updatePositionLeft(position), highScore: newHighScore};
+            return {position: updatePositionLeft(position), currentScore: newHighScore};
         
         case 'RIGHT':
-            return {position: updatePositionRight(position), highScore: newHighScore};
+            return {position: updatePositionRight(position), currentScore: newHighScore};
 
         case 'UP':
             //return updatePositionLeft(position);
-            return {position: flipMatrix(updatePositionLeft(flipMatrix(position))), highScore: newHighScore};
+            return {position: flipMatrix(updatePositionLeft(flipMatrix(position))), currentScore: newHighScore};
 
         case 'DOWN': 
-            return {position: flipMatrix(updatePositionRight(flipMatrix(position))), highScore: newHighScore};
+            return {position: flipMatrix(updatePositionRight(flipMatrix(position))), currentScore: newHighScore};
             
         default: 
-            return {position: position, highScore: newHighScore};
+            return {position: position, currentScore: newHighScore};
     }
 }
 
@@ -121,11 +122,17 @@ function spawnTiles(position, amountOfTiles) {
 function position(state=initialState, action) {
     switch(action.type) {
         case MAKE_MOVE:
-            const newPosition = updatePosition(state.position, action.direction, state.highScore);
-
+            const newPosition = updatePosition(state.position, action.direction, state.currentScore);
+            var newHighScore = state.highScore;
+            console.log(newPosition.currentScore);
+            if(newPosition.currentScore > state.highScore) {
+                newHighScore = newPosition.currentScore;
+                localStorage.setItem('highScore', newHighScore);
+            }
             return Object.assign({}, state, {
                 position: newPosition.position,
-                highScore: newPosition.highScore
+                currentScore: newPosition.currentScore,
+                highScore: newHighScore,
             });
 
         case SPAWN_TILES:

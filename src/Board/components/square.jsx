@@ -7,19 +7,6 @@ function BoardSquare(props) {
 }
 
 function Square (props) {
-    // constructor(props) {
-    //     super(props);
-    //     console.log(this.props);
-    //     this.stylePosition = {
-    //         top: parseInt(this.props.row) * 64 + 'px',
-    //         left: parseInt(this.props.column) * 64 + 'px',
-    //         // WebkitTransform: `translate3d(${this.props.x}px, 0, 0)`,
-    //         // transform: `translate3d(${this.props.x}px, 0, 0)`,
-              
-    //     }
-    //     console.log(this.stylePosition)
-    // }
-    console.log('in square')
     const stylePosition = {
             top: 8 + parseInt(props.row) * (128 + 14) + 'px',
             left: 8 + parseInt(props.column) * (128 + 14) + 'px',
@@ -35,7 +22,25 @@ function Square (props) {
 
 }
 
-//id={`${props.row}` + `${props.column}`}
+function MiniBoardSquare(props) {
+    return (
+        <div className="miniBoardSquare"></div>
+    )   
+}
+
+function MiniSquare(props) {
+    const stylePosition = {
+            top: 4 + parseInt(props.row) * (64 + 7) + 'px',
+            left: 4 + parseInt(props.column) * (64 + 7) + 'px',
+    }
+    
+    
+    return (
+        <div id={`${props.id}`} className={"miniActiveSquare square" + props.number} style={stylePosition}> 
+            <p>{props.number}</p>
+        </div>
+    )
+}
 
 
-export { BoardSquare, Square };
+export { BoardSquare, Square, MiniBoardSquare, MiniSquare };
