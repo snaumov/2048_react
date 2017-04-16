@@ -13,9 +13,11 @@ export function setAmountOfTilesToSpawn(amount) {
     }
 }
 
-export function changeSettings(amountOfTilesToSpawn) {
+export function changeSettingsAndShowNotification(amountOfTilesToSpawn, notificationText) {
     return dispatch => {
         dispatch(setAmountOfTilesToSpawn(amountOfTilesToSpawn));
+        dispatch(showNotification(notificationText));
+        setTimeout(() => dispatch(hideNotification()), 3000);
     }
 }
 

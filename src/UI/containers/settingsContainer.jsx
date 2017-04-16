@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Settings from '../components/settings'
-import { changeSettings } from '../actions'
+import NotificationPanel from '../components/notificationPanel'
+import { changeSettingsAndShowNotification } from '../actions'
+
 
 
 class SettingsContainerComponent extends Component {
@@ -11,12 +13,13 @@ class SettingsContainerComponent extends Component {
     }
 
     updateSettings(newSettings) {
-        this.props.dispatch(changeSettings(newSettings.amountOfTilesToSpawn))
+        this.props.dispatch(changeSettingsAndShowNotification(newSettings.amountOfTilesToSpawn, 'Settings updated'));
     }
     render() {
         return (
             <div>
                 <Settings onSaveButtonClick={this.updateSettings} amountOfTilesToSpawn={this.props.position.amountOfTilesToSpawn}/>
+                <NotificationPanel showNotification={this.props.ui.showNotification} notificationText={this.props.ui.notificationText}/>
             </div>
         );
     }
@@ -24,7 +27,8 @@ class SettingsContainerComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        position: state.position
+        position: state.position,
+        ui: state.UI
     }
 }
 

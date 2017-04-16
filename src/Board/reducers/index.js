@@ -159,8 +159,10 @@ function position(state=initialState, action) {
             })
         
         case LOAD_GAME:
+            const gameToLoad = JSON.parse(localStorage.getItem('savedGames'))[action.gameNumber];
             return Object.assign({}, state, {
-                position: JSON.parse(localStorage.getItem('savedGames'))[action.gameNumber],
+                position: gameToLoad.position,
+                currentScore: gameToLoad.score,
             })
         
         case NEW_GAME: 

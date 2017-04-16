@@ -30,7 +30,7 @@ class GameViewComponent extends Component {
     }
 
     saveGameButtonClick (game) {
-        this.props.dispatch(saveGameAndShowNotification(this.props.position.position, 'The game has been saved!'));
+        this.props.dispatch(saveGameAndShowNotification({position: this.props.position.position, score: this.props.position.currentScore}, 'The game has been saved!'));
     }
 
     newGameButtonClick() {
