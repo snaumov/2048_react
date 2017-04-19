@@ -8,8 +8,8 @@ function BoardSquare(props) {
 
 function Square (props) {
     const stylePosition = {
-            top: 8 + parseInt(props.row) * (128 + 14) + 'px',
-            left: 8 + parseInt(props.column) * (128 + 14) + 'px',
+            top: 8 + parseInt(props.row) * (128 + 16) + 'px',
+            left: 8 + parseInt(props.column) * (128 + 16) + 'px',
     }
     
     
