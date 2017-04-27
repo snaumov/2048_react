@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "gh-pages": "^0.12.0",
     "node-sass": "^4.5.0",
     "npm-run-all": "^4.0.2",
     "react-addons-css-transition-group": "^15.4.2",
@@ -29,6 +30,8 @@
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start-js": "react-scripts start"
-  }
+    "start-js": "react-scripts start",
+    "deploy": "gh-pages -d build --repo https://github.com/snaumov/2048_react.git"
+  }, 
+  "homepage": "https://snaumov.github.io/2048_react"
 }
